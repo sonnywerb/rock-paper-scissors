@@ -66,4 +66,5 @@ function game() {
         console.log(playRound(playerSelection, getComputerChoice()));
         rounds++;
     }
+    return 'Good game!'
 }
