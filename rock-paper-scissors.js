@@ -14,28 +14,21 @@ function playRound(playerSelection, computerSelection) {
     // make both the playerSelection and computerSelection to uppercase so we can do case
     // insensitive comparison
     playerSelection = playerSelection.toUpperCase();
-    let result = '';
+
     // check if playerSelection beats computerSelection through comparison
-    if (playerSelection === 'ROCK') {
+    if (playerSelection === computerSelection) {
+        return 'Draw!'
+    } else if (playerSelection === 'ROCK') {
         switch (computerSelection) {
-            case 'ROCK':
-                result = 'Draw!'
-                return result;
             case 'PAPER':
-                result = `You lose! ${computerSelection} beats ${playerSelection}.`;
-                return result;
+                return `You lose! ${computerSelection} beats ${playerSelection}.`;
             case 'SCISSORS':
-                result = `You win! ${playerSelection} beats ${computerSelection}.`;
-                return result;
+                return `You win! ${playerSelection} beats ${computerSelection}.`;
         }
     } else if (playerSelection === 'PAPER') {
         switch (computerSelection) {
             case 'ROCK':
-                result = `You win! ${playerSelection} beats ${computerSelection}.`;
-                return result;
-            case 'PAPER':
-                result = 'Draw!'
-                return result;
+                return `You win! ${playerSelection} beats ${computerSelection}.`;
             case 'SCISSORS':
                 result = `You lose! ${computerSelection} beats ${playerSelection}.`;
                 return result;
@@ -43,14 +36,9 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection === 'SCISSORS') {
         switch(computerSelection) {
             case 'ROCK':
-                result = `You lose! ${computerSelection} beats ${playerSelection}.`;
-                return result;
+                return `You lose! ${computerSelection} beats ${playerSelection}.`;
             case 'PAPER':
-                result = `You win! ${playerSelection} beats ${computerSelection}.`;
-                return result;
-            case 'SCISSORS':
-                result = 'Draw!'
-                return result;
+                return `You win! ${playerSelection} beats ${computerSelection}.`;
         }
     }
 }
