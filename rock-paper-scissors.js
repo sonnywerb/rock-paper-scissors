@@ -1,4 +1,4 @@
-let choices = ['ROCK', 'PAPER', 'SCISSORS'];
+let choices = ['ROCK', 'PAPER', 'SCISSOR'];
 
 function getComputerChoice() {
     let computerChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -7,25 +7,27 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toUpperCase();
+    let result = '';
 
     if (playerSelection === computerSelection) {
-        return 'Draw!'
+        result = 'Draw!';
+        return result;
     } else if (playerSelection === 'ROCK') {
         switch (computerSelection) {
             case 'PAPER':
                 return `You lose! ${computerSelection} beats ${playerSelection}.`;
-            case 'SCISSORS':
+            case 'SCISSOR':
                 return `You win! ${playerSelection} beats ${computerSelection}.`;
         }
     } else if (playerSelection === 'PAPER') {
         switch (computerSelection) {
             case 'ROCK':
                 return `You win! ${playerSelection} beats ${computerSelection}.`;
-            case 'SCISSORS':
+            case 'SCISSOR':
                 result = `You lose! ${computerSelection} beats ${playerSelection}.`;
                 return result;
         }
-    } else if (playerSelection === 'SCISSORS') {
+    } else if (playerSelection === 'SCISSOR') {
         switch(computerSelection) {
             case 'ROCK':
                 return `You lose! ${computerSelection} beats ${playerSelection}.`;
@@ -36,19 +38,21 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    let rounds = 1;
-    while (rounds <= 5) {
-        let playerSelection = prompt(`Round ${rounds}: ROCK, PAPER, or SCISSORS?`, 'ROCK');
-        console.log(playRound(playerSelection, getComputerChoice()));
-        rounds++;
-    }
-    return 'Good game!'
-    
+    // let rounds = 1;
+    // while (rounds <= 5) {
+    //     let playerSelection = prompt(`Round ${rounds}: ROCK, PAPER, or SCISSORS?`, 'ROCK');
+    //     console.log(playRound(playerSelection, getComputerChoice()));
+    //     rounds++;
+    // }
+    // return 'Good game!'
 }
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        alert(button.id);
-    });
+        let computerSelected = getComputerChoice();
+        let playerSelected = button.id;
+        console.log(playRound(playerSelected, computerSelected));
+    })
 });
+
