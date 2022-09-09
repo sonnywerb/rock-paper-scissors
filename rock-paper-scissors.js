@@ -1,6 +1,23 @@
 let choices = ['ROCK', 'PAPER', 'SCISSOR'];
+let playerName = '';
 let computerScore = 0;
 let playerScore = 0;
+
+disableButtons();
+
+const submit = document.querySelector('#submit');
+submit.addEventListener('click', () => {
+    playerName = document.getElementById('name').value;
+    document.getElementById('name').value = "";
+
+    const container = document.querySelector('.container');
+
+    const h4 = document.createElement('h4');
+    h4.textContent = `Good luck ${playerName}!`;
+    container.append(h4);
+    submit.disabled = true;
+    enableButtons();
+});
 
 function getComputerChoice() {
     let computerChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -9,6 +26,27 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toUpperCase();
+
+    const currentPlayer = playerName.toUpperCase();
+    if (currentPlayer === 'DAN') {
+        if (playerSelection === 'ROCK') {
+            computerSelection = 'SCISSOR';
+        } else if (playerSelection === 'PAPER') {
+            computerSelection = 'ROCK';
+        } else {
+            computerSelection = 'PAPER';
+        }
+    }
+
+    if (currentPlayer === 'JASON') {
+        if (playerSelection === 'ROCK') {
+            computerSelection = 'PAPER';
+        } else if (playerSelection === 'PAPER') {
+            computerSelection = 'SCISSOR';
+        } else {
+            computerSelection = 'ROCK';
+        }
+    }
 
     if (playerSelection === computerSelection) {
         return 'Draw!';
@@ -61,10 +99,12 @@ function newGame() {
         const score = document.querySelector('#score');
         score.textContent = '';
 
-        const buttons = document.querySelectorAll('.selection');
-        buttons.forEach((button) => {
-            button.disabled = false;
-        });
+        const container = document.querySelector('.container');
+        container.removeChild(container.lastChild);
+
+        const submit = document.querySelector('submit');
+        submit.disabled = false;
+        enableButtons();
     })
 }
 
@@ -75,29 +115,32 @@ function disableButtons() {
     });
 }
 
+function enableButtons() {
+    const buttons = document.querySelectorAll('.selection');
+    buttons.forEach((button) => {
+        button.disabled = false;
+    });
+}
+
 function scoreTracker() {
     let gameOverMsg = ' ';
     if (playerScore === 5) {
-        gameOverMsg =  `You win! Player: ${playerScore} - Computer: ${computerScore}!`;
+        gameOverMsg =  `You win! ${playerName}: ${playerScore} - Computer: ${computerScore}!`;
         disableButtons();
         newGame();
         return gameOverMsg;
     }
     if (computerScore === 5) {
-        gameOverMsg =  `You lost! Player: ${playerScore} - Computer: ${computerScore}`;
+        gameOverMsg =  `You lost! ${playerName}: ${playerScore} - Computer: ${computerScore}`;
         disableButtons
         disableButtons();
         newGame();
         return gameOverMsg;
     }
-    return `Player: ${playerScore} - Computer: ${computerScore}`;
+    return `${playerName}: ${playerScore} - Computer: ${computerScore}`;
 }
 
-function game() {
-    
-}
-
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.container2>button');
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         let computerSelected = getComputerChoice();
@@ -109,4 +152,6 @@ buttons.forEach((button) => {
         
     })
 });
+
+
 
