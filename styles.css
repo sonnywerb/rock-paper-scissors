@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    margin: 10px;
+    margin-bottom: 15px;
+}
+
+.container2 {
+    margin: 10px;
+}
+
+.container3 {
+    margin: 10px;
+}
