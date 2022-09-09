@@ -102,7 +102,7 @@ function newGame() {
         const container = document.querySelector('.container');
         container.removeChild(container.lastChild);
 
-        const submit = document.querySelector('submit');
+        const submit = document.querySelector('#submit');
         submit.disabled = false;
         enableButtons();
     })
